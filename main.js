@@ -630,3 +630,73 @@ function showToast(msg, duration = 1800){
     toast.classList.remove("show");
   }, duration);
 }
+
+
+const couplets = document.getElementById("couplets");
+const coupletsBtn = document.getElementById("coupletsBtn");
+
+const COUPLETS_POOL = [
+   { l:"万事顺遂", r:"平安喜乐", t:"过个好年" },
+  { l:"新岁皆安", r:"所愿皆成", t:"新年快乐" },
+  { l:"顺风顺水", r:"好事成双", t:"大吉大利" },
+  { l:"心想事成", r:"一路开挂", t:"好运加载" },
+
+  { l:"日日有喜", r:"年年无忧", t:"喜上眉梢" },
+  { l:"诸事顺意", r:"一切可期", t:"新春如意" },
+  { l:"吃嘛嘛香", r:"睡嘛嘛甜", t:"快乐到家" },
+
+  { l:"早八不困", r:"晚睡不崩", t:"精神在线" },
+  { l:"雨过会晴", r:"雾散见光", t:"都会好的" },
+  { l:"少点内耗", r:"多点好运", t:"松弛一点" },
+  { l:"今天不急", r:"明天也行", t:"慢慢来吧" },
+
+  { l:"钱包鼓鼓", r:"心情美美", t:"发财要紧" },
+  { l:"照片好看", r:"视频顺滑", t:"出片就行" },
+  { l:"好运常在", r:"惊喜频来", t:"开门见喜" },
+  { l:"天气随缘", r:"开心优先", t:"随便都行" },
+
+  { l:"烦恼退退", r:"快乐进进", t:"一键清空" },
+  { l:"人间值得", r:"你也值得", t:"抬头见喜" },
+
+  { l:"明天更好", r:"今天也行", t:"就这样吧" },
+  { l:"稳稳当当", r:"顺顺利利", t:"平安就好" },
+  { l:"云来云去", r:"心安就行", t:"随天气吧" },
+];
+
+let coupletsOn = false;
+
+function setCoupletsText(){
+  if (!couplets) return;
+  const c = COUPLETS_POOL[Math.floor(Math.random()*COUPLETS_POOL.length)];
+  const leftEl = couplets.querySelector(".left");
+  const rightEl = couplets.querySelector(".right");
+  const topEl = couplets.querySelector(".top");
+  if (leftEl) leftEl.textContent = c.l;
+  if (rightEl) rightEl.textContent = c.r;
+  if (topEl) topEl.textContent = c.t;
+}
+
+function toggleCouplets(){
+  if (!couplets || !coupletsBtn) return;
+
+  coupletsOn = !coupletsOn;
+
+  if (coupletsOn){
+    setCoupletsText();
+    couplets.classList.add("show");
+    coupletsBtn.classList.add("is-on");
+    coupletsBtn.setAttribute("aria-pressed","true");
+    coupletsBtn.textContent = "🧧撕下来";
+    showToast("已贴上春联 ✅", 1200);
+  } else {
+    couplets.classList.remove("show");
+    coupletsBtn.classList.remove("is-on");
+    coupletsBtn.setAttribute("aria-pressed","false");
+    coupletsBtn.textContent = "🧧贴春联";
+    showToast("春联收起来了", 1100);
+  }
+}
+
+if (coupletsBtn){
+  coupletsBtn.addEventListener("click", toggleCouplets);
+}
