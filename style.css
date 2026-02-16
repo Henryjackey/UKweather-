@@ -139,7 +139,6 @@ p{
 .bunny,.capybara{z-index:8;}
 .ground{z-index:9;}
 
-/* 🏰 城堡：缩小一点点，保持远景 */
 .castle{
   position:absolute;
   bottom:62px;
@@ -154,7 +153,6 @@ p{
   user-select:none;
 }
 
-/* ☁️ 云：更轻、更透明 */
 .cloud{
   position:absolute;
   height:42px;
@@ -176,7 +174,6 @@ p{
   100%{ transform: translateX(640px) scale(1); }
 }
 
-/* 💨 风线 */
 .wind{
   position:absolute; inset:0;
   opacity: var(--wind-opacity);
@@ -197,7 +194,6 @@ p{
   100%{ transform: translateX(720px); opacity:0; }
 }
 
-/* 🌧️/❄️ 降水 */
 .precip{
   position:absolute; inset:0;
   opacity: var(--precip-opacity);
@@ -219,7 +215,7 @@ p{
 }
 @keyframes fallSnow{ to{ transform: translateY(320px) translateX(26px); opacity:.2; } }
 
-/* 🌫 雾 */
+/* 雾 */
 .fog{
   position:absolute;
   inset:-10%;
@@ -233,7 +229,7 @@ p{
   pointer-events:none;
 }
 
-/* ⚡ 闪电 */
+/* 闪电 */
 .lightning{
   position:absolute; inset:0;
   opacity:0;
@@ -242,7 +238,7 @@ p{
   pointer-events:none;
 }
 
-/* 🧨 烟花画布 */
+/* 烟花画布 */
 .fireworks{
  position:absolute; inset:0;
   width:100%; height:100%;
@@ -252,7 +248,7 @@ p{
   mix-blend-mode: screen;
 }
 
-/* 🐰🦫 动物：去掉“白描边变白”，只留轻阴影 */
+/* 动物：去掉“白描边变白”，只留轻阴影 */
 .bunny, .capybara{
   pointer-events:none;
   user-select:none;
@@ -263,7 +259,7 @@ p{
   position:absolute;
   left:24px;
   bottom:14px;
-  width: clamp(60px, 15vw, 78px); /* ✅ 兔子更大且手机自适应 */
+  width: clamp(60px, 15vw, 78px); 
   height:auto;
   transform-origin: 50% 90%;
   animation: hop 3.6s ease-in-out infinite;
@@ -309,7 +305,7 @@ p{
   user-select: none;
 }
 
-/* 烟花开启时的黑幕（独立覆盖层） */
+/* 烟花开启时的黑幕*/
 .scene.fireworks-on::before{
   content:"";
   position:absolute;
@@ -360,11 +356,6 @@ p{
   transform: translateY(0);
 }
 
-/* =========================================================
-   ✅ NEW: 春联 + 春联按钮（仅追加，不改你原样式）
-   ========================================================= */
-
-/* 新按钮：和 fireBtn 同一行时不挤，手机上自动换行由 actions 控制 */
 .btn--couplets{
   width:auto;
   background: rgba(255, 149, 0, .12);
@@ -383,7 +374,7 @@ p{
 /* 春联层级：在城堡前（但在动物后面可按喜好调，这里给城堡前、云后） */
 .couplets{
   position:absolute;
-  inset: 0;               /* ✅ 让它覆盖整个 scene，便于贴边定位 */
+  inset: 0;              
   display:none;
   pointer-events:none;
   z-index: 3;
@@ -423,7 +414,7 @@ p{
 
 .cp.top{
   position:absolute;
-  top: 22px;                 /* ← 想更靠上就调小，比如 16px；更靠下就调大 */
+  top: 22px; 
   left: 50%;
   transform: translateX(-50%);
   padding: 6px 14px;
@@ -455,10 +446,6 @@ p{
   to{ transform: translateY(0) scale(1); opacity:1; }
 }
 
-/* =========================
-   ✅ NEW: Couplets layer fix
-   让春联层覆盖整个 scene，横联永远居中
-   ========================= */
 .couplets{
   position:absolute;
   inset:0;                 /* 关键：铺满整个 .scene */
@@ -471,7 +458,6 @@ p{
 
 .couplets.is-on{ display:block; }
 
-/* 春联通用贴纸风 */
 .couplets .cp{
   position:absolute;
   padding: 10px 10px;
@@ -485,7 +471,6 @@ p{
   text-shadow: 0 1px 0 rgba(0,0,0,.15);
 }
 
-/* 左右竖联：垂直居中 */
 .couplets .cp.left{
   left: 14px;
   top: 50%;
@@ -502,7 +487,6 @@ p{
   text-orientation: upright;
 }
 
-/* ✅ 横联：用 left/right + margin auto 物理居中（比 translateX 更稳） */
 .couplets .cp.top{
   top: 18px;
   left: 0;
@@ -529,3 +513,4 @@ p{
   font-weight: 800;
   border-radius: 12px; 
 }
+
