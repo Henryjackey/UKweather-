@@ -360,4 +360,172 @@ p{
   transform: translateY(0);
 }
 
+/* =========================================================
+   ✅ NEW: 春联 + 春联按钮（仅追加，不改你原样式）
+   ========================================================= */
 
+/* 新按钮：和 fireBtn 同一行时不挤，手机上自动换行由 actions 控制 */
+.btn--couplets{
+  width:auto;
+  background: rgba(255, 149, 0, .12);
+  border:1px solid rgba(255, 149, 0, .30);
+  color:#7c2d12;
+  white-space:nowrap;
+}
+@media (max-width: 420px){
+  .btn--couplets{ width:100%; }
+}
+.btn--couplets.is-on{
+  background: rgba(255, 149, 0, .20);
+  border-color: rgba(255, 149, 0, .42);
+}
+
+/* 春联层级：在城堡前（但在动物后面可按喜好调，这里给城堡前、云后） */
+.couplets{
+  position:absolute;
+  inset: 0;               /* ✅ 让它覆盖整个 scene，便于贴边定位 */
+  display:none;
+  pointer-events:none;
+  z-index: 3;
+}
+
+.couplets.show{ display:block; }
+
+.cp{
+  background: linear-gradient(180deg, #d9332f, #b31212);
+  color: #ffd77a;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,.22);
+  text-shadow: 0 1px 0 rgba(0,0,0,.18);
+  border: 1px solid rgba(255,215,122,.35);
+}
+
+.cp.left, .cp.right{
+  position:absolute;
+  top: 84px;                               
+  width: clamp(18px, 4.6vw, 22px);
+  height: clamp(96px, 24vw, 126px);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  border-radius: 8px;
+}
+
+.cp.left{
+  left: 12px;                           
+}
+
+.cp.right{
+  right: 12px;          
+}
+
+
+.cp.top{
+  position:absolute;
+  top: 22px;                 /* ← 想更靠上就调小，比如 16px；更靠下就调大 */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+
+  /* 小细节：让它更像贴纸 */
+  box-shadow: 0 10px 22px rgba(0,0,0,.22);
+  border: 1px solid rgba(255,215,122,.55);
+}
+
+/* 贴上去的小动效 */
+.couplets.show .cp{
+  animation: pasteIn .26s ease-out both;
+}
+@keyframes pasteIn{
+  from{ transform: translateY(6px) scale(.97); opacity:0; }
+  to{ transform: translateY(0) scale(1); opacity:1; }
+}
+
+.couplets.show .cp.left,
+.couplets.show .cp.right{
+  animation-name: pasteInSide;
+}
+@keyframes pasteInSide{
+  from{ transform: translateY(6px) scale(.97); opacity:0; }
+  to{ transform: translateY(0) scale(1); opacity:1; }
+}
+
+/* =========================
+   ✅ NEW: Couplets layer fix
+   让春联层覆盖整个 scene，横联永远居中
+   ========================= */
+.couplets{
+  position:absolute;
+  inset:0;                 /* 关键：铺满整个 .scene */
+  width:100%;
+  height:100%;
+  z-index: 6;              /* 压过云/雨/雾；烟花 canvas 你按需要再调 */
+  pointer-events:none;     /* 不挡点击放烟花 */
+  display:none;            /* 默认隐藏 */
+}
+
+.couplets.is-on{ display:block; }
+
+/* 春联通用贴纸风 */
+.couplets .cp{
+  position:absolute;
+  padding: 10px 10px;
+  border-radius: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.22);
+  border: 1px solid rgba(255,215,122,.55);
+  background: linear-gradient(180deg, #d94b3b, #b93025);
+  color: #ffe6b0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+}
+
+/* 左右竖联：垂直居中 */
+.couplets .cp.left{
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+.couplets .cp.right{
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+/* ✅ 横联：用 left/right + margin auto 物理居中（比 translateX 更稳） */
+.couplets .cp.top{
+  top: 18px;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 8px 16px;
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+}
+
+.couplets .cp.left,
+.couplets .cp.right{
+  width: 32px;             
+  padding: 10px 0;         
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  letter-spacing: 0;
+  line-height: 1.15;
+
+  font-size: 15px;          
+  font-weight: 800;
+  border-radius: 12px; 
+}
