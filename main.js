@@ -20,9 +20,6 @@ const rand = (min, max) => min + Math.random() * (max - min);
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const toast = document.getElementById("toast");
 
-// =======================================================
-// 🌦️ Weather（只有“随机/下一种”按钮，无下拉）
-// =======================================================
 const WEATHERS = [
   {
     id:"sunny", name:"晴天 ☀️",
@@ -310,14 +307,9 @@ function randomWeather(){
 magicBtn.addEventListener("click", randomWeather);
 cycleBtn.addEventListener("click", ()=> setWeatherByIndex(weatherIdx + 1));
 
-// 启动默认随机一次（更有“魔法”感）
+// 启动默认随机一次
 setWeatherByIndex(weatherIdx);
 
-
-// =======================================================
-// 🧨 Fireworks（更盛大：齐射、多重爆裂、尾迹、闪光 bloom）
-// 与天气完全独立
-// =======================================================
 let fireworksOn = false;
 let rafId = null;
 let autoTimer = null;
@@ -335,7 +327,7 @@ resizeCanvas();
 // 粒子系统
 const rockets = [];
 const sparks  = [];
-const blooms  = []; // 闪光圈（盛大感）
+const blooms  = []; 
 
 function spawnRocketVolley(x, yTarget, n){
   for (let i=0;i<n;i++){
@@ -353,7 +345,7 @@ function spawnRocketVolley(x, yTarget, n){
 }
 
 function explode(x, y, hue){
-  // bloom 光圈（“盛大”关键）
+  // bloom 光圈
   blooms.push({ x, y, r: 10, a: 0.55, hue });
 
   // 多花型：随机选择
@@ -362,7 +354,7 @@ function explode(x, y, hue){
   else if (mode < 0.75) burstSpiral(x, y, hue);
   else burstRing(x, y, hue);
 
-  // 二次爆裂（更盛大）
+  // 二次爆裂
   if (Math.random() < 0.55){
     setTimeout(()=>{
       blooms.push({ x, y, r: 8, a: 0.45, hue: hue + rand(-30,30) });
@@ -534,7 +526,6 @@ function startFireworks(){
   fireBtn.setAttribute("aria-pressed", "true");
   fireBtn.textContent = "🧨 烟花进行中";
 
-  // 🎉 彩蛋气泡
   showToast("小宋同学，过年好呀！ 🧨", 2000);
 
   resizeCanvas();
@@ -542,7 +533,6 @@ function startFireworks(){
 
   if (!rafId) rafId = requestAnimationFrame(stepFireworks);
 
-  // 自动盛大齐射：更密集、更“过年”
   const schedule = ()=>{
     if (!fireworksOn) return;
 
@@ -700,3 +690,4 @@ function toggleCouplets(){
 if (coupletsBtn){
   coupletsBtn.addEventListener("click", toggleCouplets);
 }
+
