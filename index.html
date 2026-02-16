@@ -16,6 +16,9 @@
     <div class="actions" aria-label="操作区">
       <button id="magicBtn" class="btn btn--magic" type="button">✨ 魔法按钮：随机天气</button>
       <button id="fireBtn" class="btn btn--fire" type="button" aria-pressed="false">🧨来点烟花！</button>
+
+      <!-- ✅ NEW: 贴春联按钮（只新增，不改你原按钮） -->
+      <button id="coupletsBtn" class="btn btn--couplets" type="button" aria-pressed="false">🧧贴春联</button>
     </div>
 
     <div class="scene" id="scene" role="img" aria-label="天气场景（可点击放烟花）" tabindex="0">
@@ -36,6 +39,13 @@
       <img class="bunny" id="bunny" src="./assets/bunny.png" alt="bunny" />
       <img class="capybara" id="capybara" src="./assets/capybara.webp" alt="capybara" />
 
+      <!-- ✅ NEW: 春联（默认隐藏；点击按钮贴上） -->
+      <div id="couplets" class="couplets" aria-hidden="true">
+        <div class="cp left">万事顺遂</div>
+        <div class="cp right">平安喜乐</div>
+        <div class="cp top">过个好年</div>
+      </div>
+
       <div class="ground" aria-hidden="true"></div>
       <div id="toast" class="toast" aria-live="polite"></div>
     </div>
@@ -47,6 +57,7 @@
   <script src="./main.js"></script>
 </body>
 </html>
+
 
 
 
